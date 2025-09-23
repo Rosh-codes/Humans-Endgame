@@ -45,3 +45,58 @@ body{
   gap: 5.5px;
   border-radius: 10px;
 }
+.Guess-section{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 90vw;
+  margin: auto;
+  gap: 3px; 
+}
+.Guess-section div {
+   background-color: grey;
+  padding: 10px;
+  min-width: 40px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid white;
+  border-radius: 4px;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: white;
+}
+.Keyboard-section{
+  display: flex;
+  font-size: 1.2rem;
+  max-width: 80vw;
+  flex-wrap: wrap;
+  margin: auto;
+  width: min(750px,90vw);
+  justify-content: center;
+  gap: 3px;
+  margin-top: 40px;
+}
+.Keyboard-section button {
+  border-radius: 3px;
+  display: flex;
+  height: clamp(40px, 4vh, 60px);
+  width: clamp(40px, 5vw, 60px);
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3A3A3A 0%, #232323 100%);
+  color: #E0E0E0;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.5);
+}
+
+
+.Keyboard-section button:hover{
+  background: #00E5FF;
+  color: black;
+}
+@media (hover: none) {
+  .Keyboard-section button:hover {
+    background: linear-gradient(135deg, #3A3A3A 0%, #232323 100%); 
+    color: #E0E0E0
+  }
+}

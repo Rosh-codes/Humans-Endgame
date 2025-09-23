@@ -1,56 +1,56 @@
 const people = [
   {
     name: "Intern",
-    backgroundColor: "#4CAF50", // green for alive
+    backgroundColor: "#4CAF50",
     color: "#FFFFFF",
     icon: "👶",
   },
   {
     name: "Junior Dev",
-    backgroundColor: "#00BCD4", // cyan
+    backgroundColor: "#2196F3", 
     color: "#FFFFFF",
     icon: "🧑‍💻",
   },
   {
     name: "Mid-Level Dev",
-    backgroundColor: "#8BC34A",
+    backgroundColor: "#009688", 
     color: "#FFFFFF",
     icon: "💻",
   },
   {
     name: "Senior Dev",
-    backgroundColor: "#FFC107", // amber
-    color: "#FFFFFF",
+    backgroundColor: "#FFC107", 
+    color: "#FFFFFF", 
     icon: "🖥️",
   },
   {
     name: "Tech Lead",
-    backgroundColor: "#FF9800", // orange
+    backgroundColor: "#FF9800", 
     color: "#FFFFFF",
     icon: "👨‍💼",
   },
   {
     name: "Engineering Manager",
-    backgroundColor: "#FF5722", // deep orange
+    backgroundColor: "#F44336", 
     color: "#FFFFFF",
     icon: "📊",
   },
   {
     name: "Director of Engineering",
-    backgroundColor: "#F44336", // red
+    backgroundColor: "#E91E63", 
     color: "#FFFFFF",
     icon: "📈",
   },
   {
     name: "CTO",
-    backgroundColor: "#9C27B0", // purple
+    backgroundColor: "#673AB7", 
     color: "#FFFFFF",
     icon: "🧠",
   },
   {
     name: "AI Overlord",
-    backgroundColor: "#2D2D2D", // dark gray / ominous
-    color: "#FF3B3B",
+    backgroundColor: "#1C1C1C", // near black
+    color: "#FF5252", // warning red for danger
     icon: "🤖",
   },
 ];
