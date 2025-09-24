@@ -17,11 +17,20 @@ export default function App(){
       </div>
     )
   })
+  const [clickedKey,setClickedKey]=useState([])
+  console.log(clickedKey)
+  function PressKey(letter){
+    setClickedKey(prevClickKey=>{
+      return prevClickKey.includes(letter)
+      ? prevClickKey : [...prevClickKey,letter]
+    })
+    }
+    
   const keys = "abcdefghijklmnopqrstuvwxyz"
   const keyboard = keys.split("").map(aplhabet=>
   {
     return (
-      <button key={aplhabet}>
+      <button onClick={()=>PressKey(aplhabet)} key={aplhabet}>
         {aplhabet.toUpperCase()}
       </button>
     )
@@ -43,6 +52,7 @@ export default function App(){
     <section className="Keyboard-section">
       {keyboard}
     </section>
+    <button className="NewGame-Btn">New Game</button>
     </main>
   )
 }
