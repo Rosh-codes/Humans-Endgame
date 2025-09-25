@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Header from "./components/Header"
 import people from "./components/people"
+import clsx from "clsx"
 export default function App(){
   const content = people.map(role=>(
     <div className="Humans-box" style={{backgroundColor : role.backgroundColor , color:role.color}} key={role.name}>
@@ -9,7 +10,7 @@ export default function App(){
     </div>
   )
   )
-  const [Guess,SetGuess]=useState("Firewall")
+  const [Guess,SetGuess]=useState("firewall")
   const GuessWord = Guess.split("").map((letter,index)=>{
     return (
       <div key={index}>
@@ -27,11 +28,18 @@ export default function App(){
     }
     
   const keys = "abcdefghijklmnopqrstuvwxyz"
-  const keyboard = keys.split("").map(aplhabet=>
+  const keyboard = keys.split("").map(alphabet=>
   {
+const isGuessed = clickedKey.includes(alphabet)
+const isCorrect = isGuessed && Guess.includes(alphabet)
+const isWrong = isGuessed && !Guess.includes(alphabet)
+    const className = clsx({
+      CorrectKey : isCorrect,
+      WrongKey : isWrong
+    })
     return (
-      <button onClick={()=>PressKey(aplhabet)} key={aplhabet}>
-        {aplhabet.toUpperCase()}
+      <button className={className} onClick={()=>PressKey(alphabet)} key={alphabet}>
+        {alphabet.toUpperCase()}
       </button>
     )
   }

@@ -104,6 +104,15 @@ body{
   border-radius: 10px;
   font-size: 1.1rem;
 }
+.Keyboard-section button.CorrectKey {
+  background: green;
+  color: white ;
+}
+.Keyboard-section button.WrongKey {
+  background: red ;
+  color: white ;
+}
+
 @media (hover: none) {
   .Keyboard-section button:hover {
     background: linear-gradient(135deg, #3A3A3A 0%, #232323 100%); 
