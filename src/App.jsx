@@ -10,22 +10,23 @@ export default function App(){
     </div>
   )
   )
-  const [Guess,SetGuess]=useState("firewall")
-  const GuessWord = Guess.split("").map((letter,index)=>{
-    return (
-      <div key={index}>
-        {letter.toUpperCase()}
-      </div>
-    )
-  })
+  const [Guess,setGuess]=useState("firewall")
   const [clickedKey,setClickedKey]=useState([])
-  console.log(clickedKey)
+  const WrongGuessKey = clickedKey.filter(keys=>!Guess.includes(keys)).length
+  console.log(WrongGuessKey)
   function PressKey(letter){
     setClickedKey(prevClickKey=>{
       return prevClickKey.includes(letter)
       ? prevClickKey : [...prevClickKey,letter]
     })
-    }
+  }
+  const GuessWord = Guess.split("").map((letter,index)=>{
+    return (
+      <div key={index}>
+        {clickedKey.includes(letter) ? letter.toUpperCase():""}
+      </div>
+    )
+  })
     
   const keys = "abcdefghijklmnopqrstuvwxyz"
   const keyboard = keys.split("").map(alphabet=>
