@@ -8,7 +8,7 @@ export default function App() {
   const [clickedKey, setClickedKey] = useState([])
 
   const WrongGuessCount = clickedKey.filter(keys => !Guess.includes(keys)).length
-  const content = people.map((role,index) => (
+  const content = people.map((role, index) => (
     <div
       className={` Humans-box ${index < WrongGuessCount ? "lost" : ""}`}
       style={{ backgroundColor: role.backgroundColor, color: role.color }}
@@ -18,10 +18,10 @@ export default function App() {
       <span>{role.name}</span>
     </div>
   ))
-  const GameWon = Guess.split("").every(letter=>clickedKey.includes(letter))
+  const GameWon = Guess.split("").every(letter => clickedKey.includes(letter))
 
-  const GameLost = WrongGuessCount === people.length-1
-  
+  const GameLost = WrongGuessCount === people.length - 1
+
   function PressKey(letter) {
     setClickedKey(prevClickKey =>
       prevClickKey.includes(letter)
@@ -61,14 +61,23 @@ export default function App() {
   return (
     <main>
       <Header />
-      <section className="Result-section">
-        <p>You saved humanity! </p>
-        <p>The humans survive!🥳</p>
+      <section className="Result-section" style={
+        { backgroundColor: GameWon ? "green" : GameLost ? "red" : "" }
+      }>
+        {GameWon && <div className="Status-Display">
+          <p> We WON! </p>
+          <p>You saved humanity! </p>
+        </div>
+        }
+        {GameLost && <div className="Status-Display">
+          <p> We lost! </p>
+          <p>They took over </p>
+        </div>}
       </section>
       <section className="Rivals">{content}</section>
       <section className="Guess-section">{GuessWord}</section>
       <section className="Keyboard-section">{keyboard}</section>
-      {GameWon || GameLost ? <button className="NewGame-Btn">New Game</button>: null}
+      {GameWon || GameLost ? <button className="NewGame-Btn">New Game</button> : null}
     </main>
   )
 }
