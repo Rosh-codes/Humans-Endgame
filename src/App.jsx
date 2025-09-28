@@ -1,13 +1,16 @@
 import { useState } from "react"
 import Header from "./components/Header"
 import people from "./components/people"
+import { getFarewellText } from "./components/utility"
+import { getRandomWord } from "./components/words"
 import clsx from "clsx"
 
 export default function App() {
-  const [Guess, setGuess] = useState("firewall")
+  const [Guess, setGuess] = useState(()=>getRandomWord())
   const [clickedKey, setClickedKey] = useState([])
-
   const WrongGuessCount = clickedKey.filter(keys => !Guess.includes(keys)).length
+  const recentGuess = clickedKey[clickedKey.length - 1]
+  const incorrectGuess = recentGuess && !Guess.includes(recentGuess)
   const content = people.map((role, index) => (
     <div
       className={` Humans-box ${index < WrongGuessCount ? "lost" : ""}`}
@@ -41,7 +44,6 @@ export default function App() {
     const isGuessed = clickedKey.includes(alphabet)
     const isCorrect = isGuessed && Guess.includes(alphabet)
     const isWrong = isGuessed && !Guess.includes(alphabet)
-
     const className = clsx({
       CorrectKey: isCorrect,
       WrongKey: isWrong
@@ -52,6 +54,9 @@ export default function App() {
         className={className}
         onClick={() => PressKey(alphabet)}
         key={alphabet}
+        disabled={GameLost || GameWon}
+        aria-disabled = {GameLost || GameWon || isGuessed}
+
       >
         {alphabet.toUpperCase()}
       </button>
@@ -62,8 +67,13 @@ export default function App() {
     <main>
       <Header />
       <section className="Result-section" style={
-        { backgroundColor: GameWon ? "green" : GameLost ? "red" : "" }
+        { backgroundColor: GameWon ? "green" : GameLost ? "red" : incorrectGuess ? people[WrongGuessCount - 1].backgroundColor : null }
       }>
+        {!GameWon && !GameLost && WrongGuessCount > 0 && incorrectGuess &&
+          <div className="Status-Display">
+            <p>{getFarewellText(people[WrongGuessCount - 1].name)}</p>
+          </div>
+        }
         {GameWon && <div className="Status-Display">
           <p> We WON! </p>
           <p>You saved humanity! </p>
@@ -78,6 +88,7 @@ export default function App() {
       <section className="Guess-section">{GuessWord}</section>
       <section className="Keyboard-section">{keyboard}</section>
       {GameWon || GameLost ? <button className="NewGame-Btn">New Game</button> : null}
+
     </main>
   )
 }
