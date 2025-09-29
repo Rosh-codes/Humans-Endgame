@@ -1,9 +1,13 @@
-import { useState } from "react"
+import { useState ,useEffect} from "react"
 import Header from "./components/Header"
 import people from "./components/people"
 import { getFarewellText } from "./components/utility"
 import { getRandomWord } from "./components/words"
+import ReactConfetti from "react-confetti"
+
+
 import clsx from "clsx"
+
 
 export default function App() {
   const [Guess, setGuess] = useState(()=>getRandomWord())
@@ -11,6 +15,9 @@ export default function App() {
   const WrongGuessCount = clickedKey.filter(keys => !Guess.includes(keys)).length
   const recentGuess = clickedKey[clickedKey.length - 1]
   const incorrectGuess = recentGuess && !Guess.includes(recentGuess)
+
+  const GameWon = Guess.split("").every(letter => clickedKey.includes(letter))
+  const GameLost = WrongGuessCount === people.length - 1
   const content = people.map((role, index) => (
     <div
       className={` Humans-box ${index < WrongGuessCount ? "lost" : ""}`}
@@ -21,9 +28,10 @@ export default function App() {
       <span>{role.name}</span>
     </div>
   ))
-  const GameWon = Guess.split("").every(letter => clickedKey.includes(letter))
-
-  const GameLost = WrongGuessCount === people.length - 1
+  function NewGame(){
+    setGuess(getRandomWord())
+    setClickedKey([])
+  }
 
   function PressKey(letter) {
     setClickedKey(prevClickKey =>
@@ -33,11 +41,15 @@ export default function App() {
     )
   }
 
-  const GuessWord = Guess.split("").map((letter, index) => (
-    <div key={index}>
-      {clickedKey.includes(letter) ? letter.toUpperCase() : ""}
+  const GuessWord = Guess.split("").map((letter, index) => {
+      const MissedLetter = clsx({
+        missedLetter : GameLost && !clickedKey.includes(letter)
+      })
+      return(
+    <div key={index} className={MissedLetter}>
+      {clickedKey.includes(letter) || GameLost ? letter.toUpperCase() : ""}
     </div>
-  ))
+  )})
 
   const keys = "abcdefghijklmnopqrstuvwxyz"
   const keyboard = keys.split("").map(alphabet => {
@@ -62,7 +74,6 @@ export default function App() {
       </button>
     )
   })
-
   return (
     <main>
       <Header />
@@ -87,8 +98,8 @@ export default function App() {
       <section className="Rivals">{content}</section>
       <section className="Guess-section">{GuessWord}</section>
       <section className="Keyboard-section">{keyboard}</section>
-      {GameWon || GameLost ? <button className="NewGame-Btn">New Game</button> : null}
-
+      {GameWon || GameLost ? <button className="NewGame-Btn" onClick={NewGame}>New Game</button> : null}
+      {GameWon && <ReactConfetti/>}
     </main>
   )
 }

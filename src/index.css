@@ -136,6 +136,7 @@ body {
   color: white;
 }
 
+
 .Humans-box {
   position: relative;
 }
@@ -152,6 +153,9 @@ body {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.8);
+}
+.Guess-section > div.missedLetter{
+  background: red;
 }
 
 @media (hover: none) {
