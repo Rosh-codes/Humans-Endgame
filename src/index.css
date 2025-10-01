@@ -157,10 +157,3 @@ body {
 .Guess-section > div.missedLetter{
   background: red;
 }
-
-@media (hover: none) {
-  .Keyboard-section button:hover {
-    background: linear-gradient(135deg, #3A3A3A 0%, #232323 100%);
-    color: #E0E0E0;
-  }
-}
